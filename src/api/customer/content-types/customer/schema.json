@@ -1,0 +1,53 @@
+{
+  "kind": "collectionType",
+  "collectionName": "customers",
+  "info": {
+    "singularName": "customer",
+    "pluralName": "customers",
+    "displayName": "Customer"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email",
+      "unique": true
+    },
+    "imageURL": {
+      "type": "string"
+    },
+    "image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "pushAddress": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "biginteger"
+    },
+    "notes": {
+      "type": "text",
+      "private": true
+    },
+    "status": {
+      "default": 0,
+      "required": true,
+      "type": "integer"
+    }
+  }
+}
