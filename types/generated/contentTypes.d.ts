@@ -362,44 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiCustomerCustomer extends Schema.CollectionType {
-  collectionName: 'customers';
-  info: {
-    singularName: 'customer';
-    pluralName: 'customers';
-    displayName: 'Customer';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    Title: Attribute.String;
-    name: Attribute.String;
-    email: Attribute.Email & Attribute.Unique;
-    imageURL: Attribute.String;
-    image: Attribute.Media;
-    pushAddress: Attribute.String;
-    phone: Attribute.BigInteger;
-    notes: Attribute.Text & Attribute.Private;
-    status: Attribute.Integer & Attribute.Required & Attribute.DefaultTo<0>;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::customer.customer',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::customer.customer',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -513,6 +475,50 @@ export interface PluginUploadFolder extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'plugin::upload.folder',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface PluginI18NLocale extends Schema.CollectionType {
+  collectionName: 'i18n_locale';
+  info: {
+    singularName: 'locale';
+    pluralName: 'locales';
+    collectionName: 'locales';
+    displayName: 'Locale';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    name: Attribute.String &
+      Attribute.SetMinMax<{
+        min: 1;
+        max: 50;
+      }>;
+    code: Attribute.String & Attribute.Unique;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::i18n.locale',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::i18n.locale',
       'oneToOne',
       'admin::user'
     > &
@@ -671,43 +677,328 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface PluginI18NLocale extends Schema.CollectionType {
-  collectionName: 'i18n_locale';
+export interface ApiArticleArticle extends Schema.CollectionType {
+  collectionName: 'articles';
   info: {
-    singularName: 'locale';
-    pluralName: 'locales';
-    collectionName: 'locales';
-    displayName: 'Locale';
+    singularName: 'article';
+    pluralName: 'articles';
+    displayName: 'Article';
     description: '';
   };
   options: {
-    draftAndPublish: false;
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
+    draftAndPublish: true;
   };
   attributes: {
-    name: Attribute.String &
-      Attribute.SetMinMax<{
-        min: 1;
-        max: 50;
-      }>;
-    code: Attribute.String & Attribute.Unique;
+    title: Attribute.String;
+    subtitle: Attribute.Text;
+    image: Attribute.Media;
+    MediaIntro: Attribute.Media;
+    Media: Attribute.Media;
+    content: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'rich';
+        }
+      >;
+    className: Attribute.String;
+    oorder: Attribute.Integer & Attribute.DefaultTo<0>;
+    groups: Attribute.Relation<
+      'api::article.article',
+      'oneToMany',
+      'api::group.group'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'plugin::i18n.locale',
+      'api::article.article',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'plugin::i18n.locale',
+      'api::article.article',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiBannerBanner extends Schema.CollectionType {
+  collectionName: 'banners';
+  info: {
+    singularName: 'banner';
+    pluralName: 'banners';
+    displayName: 'banner';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    subtitle: Attribute.Text;
+    articles: Attribute.Relation<
+      'api::banner.banner',
+      'oneToMany',
+      'api::article.article'
+    >;
+    groups: Attribute.Relation<
+      'api::banner.banner',
+      'oneToMany',
+      'api::group.group'
+    >;
+    href: Attribute.String;
+    image: Attribute.Media;
+    start: Attribute.Date & Attribute.Required;
+    finish: Attribute.Date & Attribute.Required;
+    className: Attribute.String;
+    product: Attribute.Relation<
+      'api::banner.banner',
+      'oneToOne',
+      'api::product.product'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::banner.banner',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::banner.banner',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCustomerCustomer extends Schema.CollectionType {
+  collectionName: 'customers';
+  info: {
+    singularName: 'customer';
+    pluralName: 'customers';
+    displayName: 'Customer';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Title: Attribute.String;
+    name: Attribute.String;
+    email: Attribute.Email & Attribute.Unique;
+    imageURL: Attribute.String;
+    image: Attribute.Media;
+    pushAddress: Attribute.String;
+    phone: Attribute.BigInteger;
+    notes: Attribute.Text & Attribute.Private;
+    status: Attribute.Integer & Attribute.Required & Attribute.DefaultTo<0>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::customer.customer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::customer.customer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiGroupGroup extends Schema.CollectionType {
+  collectionName: 'groups';
+  info: {
+    singularName: 'group';
+    pluralName: 'groups';
+    displayName: 'Group';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    subtitle: Attribute.Text;
+    image: Attribute.Media;
+    href: Attribute.String;
+    parent: Attribute.Relation<
+      'api::group.group',
+      'oneToOne',
+      'api::group.group'
+    >;
+    showSubgroups: Attribute.Boolean & Attribute.DefaultTo<true>;
+    className: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::group.group',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::group.group',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiNavItemNavItem extends Schema.CollectionType {
+  collectionName: 'nav_items';
+  info: {
+    singularName: 'nav-item';
+    pluralName: 'nav-items';
+    displayName: 'NavItem';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    subtitle: Attribute.Text;
+    image: Attribute.Media;
+    href: Attribute.String;
+    className: Attribute.String;
+    position: Attribute.Enumeration<
+      [
+        'header-left',
+        'header-centre',
+        'header-right',
+        'footer-left',
+        'footer-centre',
+        'footer-right',
+        'mobile-only'
+      ]
+    >;
+    auth: Attribute.Boolean & Attribute.DefaultTo<false>;
+    group: Attribute.Relation<
+      'api::nav-item.nav-item',
+      'oneToOne',
+      'api::group.group'
+    >;
+    article: Attribute.Relation<
+      'api::nav-item.nav-item',
+      'oneToOne',
+      'api::article.article'
+    >;
+    parent: Attribute.Relation<
+      'api::nav-item.nav-item',
+      'oneToOne',
+      'api::nav-item.nav-item'
+    >;
+    imageOnly: Attribute.Boolean & Attribute.DefaultTo<false>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::nav-item.nav-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::nav-item.nav-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiProductProduct extends Schema.CollectionType {
+  collectionName: 'products';
+  info: {
+    singularName: 'product';
+    pluralName: 'products';
+    displayName: 'product';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    subtitle: Attribute.Text;
+    image: Attribute.Media;
+    media: Attribute.Media;
+    groups: Attribute.Relation<
+      'api::product.product',
+      'oneToMany',
+      'api::group.group'
+    >;
+    articles: Attribute.Relation<
+      'api::product.product',
+      'oneToMany',
+      'api::article.article'
+    >;
+    status: Attribute.String;
+    params: Attribute.JSON;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::product.product',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::product.product',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiShowcaseShowcase extends Schema.CollectionType {
+  collectionName: 'showcases';
+  info: {
+    singularName: 'showcase';
+    pluralName: 'showcases';
+    displayName: 'showcase';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    media: Attribute.Media;
+    articles: Attribute.Relation<
+      'api::showcase.showcase',
+      'oneToMany',
+      'api::article.article'
+    >;
+    groups: Attribute.Relation<
+      'api::showcase.showcase',
+      'oneToMany',
+      'api::group.group'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::showcase.showcase',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::showcase.showcase',
       'oneToOne',
       'admin::user'
     > &
@@ -725,13 +1016,19 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::customer.customer': ApiCustomerCustomer;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
+      'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'plugin::i18n.locale': PluginI18NLocale;
+      'api::article.article': ApiArticleArticle;
+      'api::banner.banner': ApiBannerBanner;
+      'api::customer.customer': ApiCustomerCustomer;
+      'api::group.group': ApiGroupGroup;
+      'api::nav-item.nav-item': ApiNavItemNavItem;
+      'api::product.product': ApiProductProduct;
+      'api::showcase.showcase': ApiShowcaseShowcase;
     }
   }
 }
