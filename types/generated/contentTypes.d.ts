@@ -703,7 +703,7 @@ export interface ApiArticleArticle extends Schema.CollectionType {
         }
       >;
     className: Attribute.String;
-    oorder: Attribute.Integer & Attribute.DefaultTo<0>;
+    order: Attribute.Integer & Attribute.DefaultTo<0>;
     groups: Attribute.Relation<
       'api::article.article',
       'oneToMany',
@@ -840,6 +840,7 @@ export interface ApiGroupGroup extends Schema.CollectionType {
     >;
     showSubgroups: Attribute.Boolean & Attribute.DefaultTo<true>;
     className: Attribute.String;
+    order: Attribute.Integer & Attribute.DefaultTo<0>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -903,6 +904,7 @@ export interface ApiNavItemNavItem extends Schema.CollectionType {
       'api::nav-item.nav-item'
     >;
     imageOnly: Attribute.Boolean & Attribute.DefaultTo<false>;
+    order: Attribute.Integer & Attribute.DefaultTo<0>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -972,6 +974,7 @@ export interface ApiShowcaseShowcase extends Schema.CollectionType {
     singularName: 'showcase';
     pluralName: 'showcases';
     displayName: 'showcase';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -988,6 +991,14 @@ export interface ApiShowcaseShowcase extends Schema.CollectionType {
       'oneToMany',
       'api::group.group'
     >;
+    content: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'rich';
+        }
+      >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

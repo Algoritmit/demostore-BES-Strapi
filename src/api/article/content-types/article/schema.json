@@ -62,7 +62,7 @@
     "className": {
       "type": "string"
     },
-    "oorder": {
+    "order": {
       "type": "integer",
       "default": 0
     },
