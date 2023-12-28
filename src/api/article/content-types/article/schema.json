@@ -29,7 +29,7 @@
         "audios"
       ]
     },
-    "MediaIntro": {
+    "mediaIntro": {
       "type": "media",
       "multiple": true,
       "required": false,
@@ -40,7 +40,7 @@
         "audios"
       ]
     },
-    "Media": {
+    "media": {
       "type": "media",
       "multiple": true,
       "required": false,

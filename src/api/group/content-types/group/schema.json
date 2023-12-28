@@ -47,6 +47,20 @@
     "order": {
       "type": "integer",
       "default": 0
+    },
+    "media": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "showTitle": {
+      "type": "boolean",
+      "default": true
     }
   }
 }

@@ -692,8 +692,8 @@ export interface ApiArticleArticle extends Schema.CollectionType {
     title: Attribute.String;
     subtitle: Attribute.Text;
     image: Attribute.Media;
-    MediaIntro: Attribute.Media;
-    Media: Attribute.Media;
+    mediaIntro: Attribute.Media;
+    media: Attribute.Media;
     content: Attribute.RichText &
       Attribute.CustomField<
         'plugin::ckeditor.CKEditor',
@@ -732,7 +732,7 @@ export interface ApiBannerBanner extends Schema.CollectionType {
   info: {
     singularName: 'banner';
     pluralName: 'banners';
-    displayName: 'banner';
+    displayName: 'Banner';
     description: '';
   };
   options: {
@@ -761,6 +761,19 @@ export interface ApiBannerBanner extends Schema.CollectionType {
       'oneToOne',
       'api::product.product'
     >;
+    media: Attribute.Media;
+    type: Attribute.Enumeration<['AD', 'DISCOUNT', 'NEWS']> &
+      Attribute.DefaultTo<'NEWS'>;
+    content: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'rich';
+        }
+      >;
+    label: Attribute.Media;
+    showTitle: Attribute.Boolean & Attribute.DefaultTo<true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -785,12 +798,13 @@ export interface ApiCustomerCustomer extends Schema.CollectionType {
     singularName: 'customer';
     pluralName: 'customers';
     displayName: 'Customer';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    Title: Attribute.String;
+    title: Attribute.String;
     name: Attribute.String;
     email: Attribute.Email & Attribute.Unique;
     imageURL: Attribute.String;
@@ -841,6 +855,8 @@ export interface ApiGroupGroup extends Schema.CollectionType {
     showSubgroups: Attribute.Boolean & Attribute.DefaultTo<true>;
     className: Attribute.String;
     order: Attribute.Integer & Attribute.DefaultTo<0>;
+    media: Attribute.Media;
+    showTitle: Attribute.Boolean & Attribute.DefaultTo<true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -999,6 +1015,12 @@ export interface ApiShowcaseShowcase extends Schema.CollectionType {
           preset: 'rich';
         }
       >;
+    image: Attribute.Media;
+    type: Attribute.Enumeration<['full', 'fit']>;
+    className: Attribute.String;
+    title: Attribute.String;
+    subsitle: Attribute.Text;
+    showTitle: Attribute.Boolean & Attribute.DefaultTo<true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

@@ -40,6 +40,37 @@
         "preset": "rich"
       },
       "customField": "plugin::ckeditor.CKEditor"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "full",
+        "fit"
+      ]
+    },
+    "className": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "subsitle": {
+      "type": "text"
+    },
+    "showTitle": {
+      "type": "boolean",
+      "default": true
     }
   }
 }
