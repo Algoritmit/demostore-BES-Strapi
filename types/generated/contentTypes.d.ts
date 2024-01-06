@@ -875,6 +875,49 @@ export interface ApiGroupGroup extends Schema.CollectionType {
   };
 }
 
+export interface ApiLabelLabel extends Schema.CollectionType {
+  collectionName: 'labels';
+  info: {
+    singularName: 'label';
+    pluralName: 'labels';
+    displayName: 'Label';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    subtitle: Attribute.Text;
+    content: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'rich';
+        }
+      >;
+    image: Attribute.Media;
+    showTitle: Attribute.Boolean & Attribute.DefaultTo<false>;
+    className: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::label.label',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::label.label',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiNavItemNavItem extends Schema.CollectionType {
   collectionName: 'nav_items';
   info: {
@@ -914,13 +957,16 @@ export interface ApiNavItemNavItem extends Schema.CollectionType {
       'oneToOne',
       'api::article.article'
     >;
-    parent: Attribute.Relation<
-      'api::nav-item.nav-item',
-      'oneToOne',
-      'api::nav-item.nav-item'
-    >;
     imageOnly: Attribute.Boolean & Attribute.DefaultTo<false>;
     order: Attribute.Integer & Attribute.DefaultTo<0>;
+    content: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'rich';
+        }
+      >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -945,6 +991,7 @@ export interface ApiProductProduct extends Schema.CollectionType {
     singularName: 'product';
     pluralName: 'products';
     displayName: 'product';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -966,6 +1013,19 @@ export interface ApiProductProduct extends Schema.CollectionType {
     >;
     status: Attribute.String;
     params: Attribute.JSON;
+    label: Attribute.Relation<
+      'api::product.product',
+      'oneToOne',
+      'api::label.label'
+    >;
+    content: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'rich';
+        }
+      >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1059,6 +1119,7 @@ declare module '@strapi/types' {
       'api::banner.banner': ApiBannerBanner;
       'api::customer.customer': ApiCustomerCustomer;
       'api::group.group': ApiGroupGroup;
+      'api::label.label': ApiLabelLabel;
       'api::nav-item.nav-item': ApiNavItemNavItem;
       'api::product.product': ApiProductProduct;
       'api::showcase.showcase': ApiShowcaseShowcase;
