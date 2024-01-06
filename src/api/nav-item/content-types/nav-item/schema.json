@@ -61,11 +61,6 @@
       "relation": "oneToOne",
       "target": "api::article.article"
     },
-    "parent": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::nav-item.nav-item"
-    },
     "imageOnly": {
       "type": "boolean",
       "default": false
@@ -73,6 +68,14 @@
     "order": {
       "type": "integer",
       "default": 0
+    },
+    "content": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "rich"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
     }
   }
 }
