@@ -967,6 +967,7 @@ export interface ApiNavItemNavItem extends Schema.CollectionType {
           preset: 'rich';
         }
       >;
+    media: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -990,7 +991,7 @@ export interface ApiProductProduct extends Schema.CollectionType {
   info: {
     singularName: 'product';
     pluralName: 'products';
-    displayName: 'product';
+    displayName: 'Product';
     description: '';
   };
   options: {
@@ -1026,6 +1027,8 @@ export interface ApiProductProduct extends Schema.CollectionType {
           preset: 'rich';
         }
       >;
+    order: Attribute.Integer & Attribute.DefaultTo<10>;
+    price: Attribute.Decimal;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

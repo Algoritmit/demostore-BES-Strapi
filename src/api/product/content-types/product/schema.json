@@ -4,7 +4,7 @@
   "info": {
     "singularName": "product",
     "pluralName": "products",
-    "displayName": "product",
+    "displayName": "Product",
     "description": ""
   },
   "options": {
@@ -68,6 +68,13 @@
         "preset": "rich"
       },
       "customField": "plugin::ckeditor.CKEditor"
+    },
+    "order": {
+      "type": "integer",
+      "default": 10
+    },
+    "price": {
+      "type": "decimal"
     }
   }
 }
