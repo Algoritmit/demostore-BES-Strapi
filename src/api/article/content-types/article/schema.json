@@ -70,6 +70,17 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::group.group"
+    },
+    "showOnHomePage": {
+      "type": "boolean"
+    },
+    "previewContent": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "rich"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
     }
   }
 }

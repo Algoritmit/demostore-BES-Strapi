@@ -75,6 +75,9 @@
     },
     "price": {
       "type": "decimal"
+    },
+    "size": {
+      "type": "string"
     }
   }
 }

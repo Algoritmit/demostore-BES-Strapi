@@ -709,6 +709,15 @@ export interface ApiArticleArticle extends Schema.CollectionType {
       'oneToMany',
       'api::group.group'
     >;
+    showOnHomePage: Attribute.Boolean;
+    previewContent: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'rich';
+        }
+      >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -900,6 +909,15 @@ export interface ApiLabelLabel extends Schema.CollectionType {
     image: Attribute.Media;
     showTitle: Attribute.Boolean & Attribute.DefaultTo<false>;
     className: Attribute.String;
+    showOnHomePage: Attribute.Boolean & Attribute.DefaultTo<false>;
+    bgColor: Attribute.Enumeration<
+      ['default', 'red', 'blue', 'green', 'pink', 'black', 'white']
+    > &
+      Attribute.DefaultTo<'default'>;
+    textColor: Attribute.Enumeration<
+      ['default', 'red', 'blue', 'green', 'pink', 'black', 'white']
+    > &
+      Attribute.DefaultTo<'default'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -968,6 +986,7 @@ export interface ApiNavItemNavItem extends Schema.CollectionType {
         }
       >;
     media: Attribute.Media;
+    externalLink: Attribute.Boolean & Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1029,6 +1048,7 @@ export interface ApiProductProduct extends Schema.CollectionType {
       >;
     order: Attribute.Integer & Attribute.DefaultTo<10>;
     price: Attribute.Decimal;
+    size: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

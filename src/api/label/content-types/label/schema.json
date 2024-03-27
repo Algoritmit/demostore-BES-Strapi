@@ -43,6 +43,36 @@
     },
     "className": {
       "type": "string"
+    },
+    "showOnHomePage": {
+      "type": "boolean",
+      "default": false
+    },
+    "bgColor": {
+      "type": "enumeration",
+      "enum": [
+        "default",
+        "red",
+        "blue",
+        "green",
+        "pink",
+        "black",
+        "white"
+      ],
+      "default": "default"
+    },
+    "textColor": {
+      "type": "enumeration",
+      "enum": [
+        "default",
+        "red",
+        "blue",
+        "green",
+        "pink",
+        "black",
+        "white"
+      ],
+      "default": "default"
     }
   }
 }

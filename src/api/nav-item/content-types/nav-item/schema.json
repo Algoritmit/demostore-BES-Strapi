@@ -78,14 +78,19 @@
       "customField": "plugin::ckeditor.CKEditor"
     },
     "media": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
+    },
+    "externalLink": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
