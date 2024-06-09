@@ -961,7 +961,8 @@ export interface ApiNavItemNavItem extends Schema.CollectionType {
         'footer-left',
         'footer-centre',
         'footer-right',
-        'mobile-only'
+        'mobile-only',
+        'menu-tab'
       ]
     >;
     auth: Attribute.Boolean & Attribute.DefaultTo<false>;
@@ -1049,6 +1050,7 @@ export interface ApiProductProduct extends Schema.CollectionType {
     order: Attribute.Integer & Attribute.DefaultTo<10>;
     price: Attribute.Decimal;
     size: Attribute.String;
+    labelSubtitle: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

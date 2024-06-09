@@ -78,6 +78,9 @@
     },
     "size": {
       "type": "string"
+    },
+    "labelSubtitle": {
+      "type": "text"
     }
   }
 }
