@@ -81,6 +81,9 @@
     },
     "labelSubtitle": {
       "type": "text"
+    },
+    "oldPrice": {
+      "type": "decimal"
     }
   }
 }

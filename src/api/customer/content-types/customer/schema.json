@@ -50,6 +50,15 @@
       "default": 0,
       "required": true,
       "type": "integer"
+    },
+    "notification_groups": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::notification-group.notification-group",
+      "mappedBy": "customers"
+    },
+    "deviceToken": {
+      "type": "text"
     }
   }
 }

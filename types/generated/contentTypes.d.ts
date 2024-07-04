@@ -822,6 +822,12 @@ export interface ApiCustomerCustomer extends Schema.CollectionType {
     phone: Attribute.BigInteger;
     notes: Attribute.Text & Attribute.Private;
     status: Attribute.Integer & Attribute.Required & Attribute.DefaultTo<0>;
+    notification_groups: Attribute.Relation<
+      'api::customer.customer',
+      'manyToMany',
+      'api::notification-group.notification-group'
+    >;
+    deviceToken: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -936,6 +942,62 @@ export interface ApiLabelLabel extends Schema.CollectionType {
   };
 }
 
+export interface ApiMessageMessage extends Schema.CollectionType {
+  collectionName: 'messages';
+  info: {
+    singularName: 'message';
+    pluralName: 'messages';
+    displayName: 'Message';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    text: Attribute.Text;
+    toCustomer: Attribute.Relation<
+      'api::message.message',
+      'oneToOne',
+      'api::customer.customer'
+    >;
+    fromCustomer: Attribute.Relation<
+      'api::message.message',
+      'oneToOne',
+      'api::customer.customer'
+    >;
+    notification_group: Attribute.Relation<
+      'api::message.message',
+      'oneToOne',
+      'api::notification-group.notification-group'
+    >;
+    refGroup: Attribute.Relation<
+      'api::message.message',
+      'oneToOne',
+      'api::group.group'
+    >;
+    refArticle: Attribute.Relation<
+      'api::message.message',
+      'oneToOne',
+      'api::article.article'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::message.message',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::message.message',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiNavItemNavItem extends Schema.CollectionType {
   collectionName: 'nav_items';
   info: {
@@ -1006,6 +1068,43 @@ export interface ApiNavItemNavItem extends Schema.CollectionType {
   };
 }
 
+export interface ApiNotificationGroupNotificationGroup
+  extends Schema.CollectionType {
+  collectionName: 'notification_groups';
+  info: {
+    singularName: 'notification-group';
+    pluralName: 'notification-groups';
+    displayName: 'NotificationGroup';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String;
+    subtitle: Attribute.Text;
+    customers: Attribute.Relation<
+      'api::notification-group.notification-group',
+      'manyToMany',
+      'api::customer.customer'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::notification-group.notification-group',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::notification-group.notification-group',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiProductProduct extends Schema.CollectionType {
   collectionName: 'products';
   info: {
@@ -1051,6 +1150,7 @@ export interface ApiProductProduct extends Schema.CollectionType {
     price: Attribute.Decimal;
     size: Attribute.String;
     labelSubtitle: Attribute.Text;
+    oldPrice: Attribute.Decimal;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1145,7 +1245,9 @@ declare module '@strapi/types' {
       'api::customer.customer': ApiCustomerCustomer;
       'api::group.group': ApiGroupGroup;
       'api::label.label': ApiLabelLabel;
+      'api::message.message': ApiMessageMessage;
       'api::nav-item.nav-item': ApiNavItemNavItem;
+      'api::notification-group.notification-group': ApiNotificationGroupNotificationGroup;
       'api::product.product': ApiProductProduct;
       'api::showcase.showcase': ApiShowcaseShowcase;
     }

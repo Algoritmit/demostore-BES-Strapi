@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "notification_groups",
+  "info": {
+    "singularName": "notification-group",
+    "pluralName": "notification-groups",
+    "displayName": "NotificationGroup"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "text"
+    },
+    "customers": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::customer.customer",
+      "inversedBy": "notification_groups"
+    }
+  }
+}
