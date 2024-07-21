@@ -818,7 +818,6 @@ export interface ApiCustomerCustomer extends Schema.CollectionType {
     email: Attribute.Email & Attribute.Unique;
     imageURL: Attribute.String;
     image: Attribute.Media;
-    pushAddress: Attribute.String;
     phone: Attribute.BigInteger;
     notes: Attribute.Text & Attribute.Private;
     status: Attribute.Integer & Attribute.Required & Attribute.DefaultTo<0>;
@@ -828,6 +827,8 @@ export interface ApiCustomerCustomer extends Schema.CollectionType {
       'api::notification-group.notification-group'
     >;
     deviceToken: Attribute.Text;
+    userAgent: Attribute.Text;
+    pushAddress: Attribute.JSON;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

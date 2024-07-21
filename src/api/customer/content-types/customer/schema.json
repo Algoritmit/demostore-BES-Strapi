@@ -36,9 +36,6 @@
         "audios"
       ]
     },
-    "pushAddress": {
-      "type": "string"
-    },
     "phone": {
       "type": "biginteger"
     },
@@ -59,6 +56,12 @@
     },
     "deviceToken": {
       "type": "text"
+    },
+    "userAgent": {
+      "type": "text"
+    },
+    "pushAddress": {
+      "type": "json"
     }
   }
 }
