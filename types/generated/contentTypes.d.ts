@@ -949,6 +949,7 @@ export interface ApiMessageMessage extends Schema.CollectionType {
     singularName: 'message';
     pluralName: 'messages';
     displayName: 'Message';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -981,6 +982,12 @@ export interface ApiMessageMessage extends Schema.CollectionType {
       'oneToOne',
       'api::article.article'
     >;
+    refProduct: Attribute.Relation<
+      'api::message.message',
+      'oneToOne',
+      'api::product.product'
+    >;
+    broadcast: Attribute.Boolean & Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
