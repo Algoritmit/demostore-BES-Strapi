@@ -9,7 +9,7 @@ const sendPUSH = async (message, pushAddress) => {
 
   let payload = {
     title: message.title,
-    text: `${message.title}\n${message.text}`,
+    text: `${message.text}`,
     link: "/",
   };
 
