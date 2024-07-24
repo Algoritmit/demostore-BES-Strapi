@@ -10,7 +10,6 @@
     "build": "strapi build",
     "strapi": "strapi"
   },
-  "devDependencies": {},
   "dependencies": {
     "@ckeditor/strapi-plugin-ckeditor": "^0.0.10",
     "@strapi/plugin-i18n": "4.15.0",
@@ -18,6 +17,7 @@
     "@strapi/strapi": "4.15.0",
     "better-sqlite3": "8.6.0",
     "pg": "^8.11.3",
+    "strapi-plugin-duplicate-button": "^1.3.16",
     "web-push": "^3.6.7"
   },
   "author": {
