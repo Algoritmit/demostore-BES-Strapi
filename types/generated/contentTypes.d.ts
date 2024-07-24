@@ -829,6 +829,7 @@ export interface ApiCustomerCustomer extends Schema.CollectionType {
     deviceToken: Attribute.Text;
     userAgent: Attribute.Text;
     pushAddress: Attribute.JSON;
+    pushToEmail: Attribute.Boolean & Attribute.DefaultTo<false>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -957,9 +958,9 @@ export interface ApiMessageMessage extends Schema.CollectionType {
   attributes: {
     title: Attribute.String;
     text: Attribute.Text;
-    toCustomer: Attribute.Relation<
+    toCustomers: Attribute.Relation<
       'api::message.message',
-      'oneToOne',
+      'oneToMany',
       'api::customer.customer'
     >;
     fromCustomer: Attribute.Relation<
@@ -967,7 +968,7 @@ export interface ApiMessageMessage extends Schema.CollectionType {
       'oneToOne',
       'api::customer.customer'
     >;
-    notification_group: Attribute.Relation<
+    toGroup: Attribute.Relation<
       'api::message.message',
       'oneToOne',
       'api::notification-group.notification-group'

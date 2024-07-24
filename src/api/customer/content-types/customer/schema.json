@@ -62,6 +62,10 @@
     },
     "pushAddress": {
       "type": "json"
+    },
+    "pushToEmail": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

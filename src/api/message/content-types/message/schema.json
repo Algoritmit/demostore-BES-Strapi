@@ -18,9 +18,9 @@
     "text": {
       "type": "text"
     },
-    "toCustomer": {
+    "toCustomers": {
       "type": "relation",
-      "relation": "oneToOne",
+      "relation": "oneToMany",
       "target": "api::customer.customer"
     },
     "fromCustomer": {
@@ -28,7 +28,7 @@
       "relation": "oneToOne",
       "target": "api::customer.customer"
     },
-    "notification_group": {
+    "toGroup": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::notification-group.notification-group"
