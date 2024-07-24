@@ -34,9 +34,9 @@ const getLink = (message) => {
 
   if (refProduct && refProduct.length > 0) return `/p/${refProduct[0].id}`;
 
-  if (refArticle && refArticle.length > 0) return `/a/${refProduct[0].id}`;
+  if (refArticle && refArticle.length > 0) return `/a/${refArticle[0].id}`;
 
-  if (refGroup && refGroup.length > 0) return `/g/${refProduct[0].id}`;
+  if (refGroup && refGroup.length > 0) return `/g/${refGroup[0].id}`;
 
   return `/`;
 };
